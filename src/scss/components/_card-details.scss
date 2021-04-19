@@ -1,0 +1,33 @@
+.card-detailes {
+
+	&__img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+
+	&__tags {
+		margin: 0 0 1rem;
+	}
+
+	&__table {
+		display: block;
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	&__th,
+	&__td {
+		border: 2px solid grey;
+		padding: 3px;
+	}
+
+	&__th {
+		text-align: left;
+		vertical-align: top;
+	}
+
+	&__td {
+		word-break: break-all;
+	}
+}

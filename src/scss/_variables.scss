@@ -1,0 +1,28 @@
+// Базовые цвета https://colorscheme.ru/color-converter.html
+
+// Colors
+
+$color-black: #000000;
+$color-white: #ffffff;
+$color-blue: #2db7f5;
+
+// Семантические цвета
+
+// Базовая типографика
+
+$font-family-base:            -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', 'Arial', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+$font-family-proxima-nova:    'Proxima Nova', sans-serif;
+
+// Ширины
+
+$width-mobile:                      767.98px;
+$width-tablet:                      991.98px;
+
+// Разное
+
+$retina2-dpi:                 192dpi;
+$retina2-dppx:                2dppx;
+
+$retina3-dpi:                 288dpi;
+$retina3-dppx:                3dppx;

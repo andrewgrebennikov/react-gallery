@@ -1,0 +1,12 @@
+@import "variables";
+@import "~normalize.css/normalize";
+
+@import "components/all";
+
+body {
+	font-family: $font-family-proxima-nova;
+}
+
+main {
+	padding: 32px 0;
+}

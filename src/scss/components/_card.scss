@@ -1,0 +1,30 @@
+@import "../variables";
+
+.card {
+	padding: 16px;
+    border-radius: 8px;
+	background-color: $color-white;
+	box-shadow: 0 12px 25px rgba(159, 161, 171, 0.25);
+
+	&__link {
+		display: block;
+		margin: 0 0 1rem;
+	}
+
+	&__img {
+		max-width: 100%;
+		display: block;
+		height: 150px;
+		object-fit: contain;
+		object-position: center;
+		margin: auto;
+	}
+
+	&__info {
+		margin: 0 0 10px;
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+}
