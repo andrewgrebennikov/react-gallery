@@ -28,8 +28,7 @@ const Home = () => {
 			<h1 className="title">Галерея</h1>
 			<Sort activeSortValue={activeSortValue} onChangeSort={handleChangeSort} />
 			<Filter onChangeFilter={handleChangeFilter} />
-			{loading && <p>Загрузка...</p>}
-			<Catalog items={filteredCards} />
+			<Catalog items={filteredCards} loading={loading} />
 		</>
 	);
 };

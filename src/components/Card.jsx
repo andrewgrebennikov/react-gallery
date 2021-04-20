@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { CardTags } from "./";
 
 const Card = ({ id, tags, likes, type, comments, webformatURL }) => {
 	return (
@@ -20,17 +21,7 @@ const Card = ({ id, tags, likes, type, comments, webformatURL }) => {
 			<p className="card__info">
 				Количество комментариев: <b>{comments}</b>
 			</p>
-			<div className="tags">
-				<ul className="tags__list">
-					{tags.split(", ").map((tag, index) => {
-						return (
-							<li key={index} className="tags__item tag">
-								{tag}
-							</li>
-						);
-					})}
-				</ul>
-			</div>
+			<CardTags tags={tags} />
 		</article>
 	);
 };

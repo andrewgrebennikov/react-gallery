@@ -49,7 +49,7 @@ export const filterCards = (items, filterBy) => (dispatch) => {
 					: items.filter((item) =>
 							item.tags
 								.split(", ")
-								.join("")
+								.join(" ")
 								.toLowerCase()
 								.includes(filterBy.toLowerCase())
 					  ),

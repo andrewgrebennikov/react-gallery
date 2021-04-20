@@ -1,14 +1,15 @@
 import React from "react";
-import { CardBlock } from "./";
+import { Card } from "./";
 
-const Catalog = ({ items }) => {
+const Catalog = ({ items, loading }) => {
 	return (
 		<div className="catalog">
+			{loading && <p>Загрузка...</p>}
 			<div className="catalog__list">
 				{items != null ? (
 					items.length ? (
 						items.map((card) => {
-							return <CardBlock key={card.id} {...card} />;
+							return <Card key={card.id} {...card} />;
 						})
 					) : items.length === 0 ? (
 						<p>Ничего не найдено</p>
