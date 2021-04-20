@@ -6,16 +6,47 @@ import { Catalog, Filter, Sort } from "../components";
 const Home = () => {
 	const dispatch = useDispatch();
 	const [loading, setLoading] = useState(true);
-	const cards = useSelector(({ cards }) => cards.items);
-	const filteredCards = useSelector(({ cards }) => cards.filteredItems);
+	let cards = useSelector(({ cards }) => cards.items);
 	const activeSortValue = useSelector(({ cards }) => cards.sortBy);
+	const activeFilterValue = useSelector(({ cards }) => cards.filterBy);
+
+	const sortCardsBy = (items, sortBy) => {
+		switch (sortBy) {
+			case "likes":
+				return items?.sort((current, next) => {
+					return next.likes - current.likes;
+				});
+			case "comments":
+				return items?.sort((current, next) => {
+					return next.comments - current.comments;
+				});
+			default:
+				return items;
+		}
+	};
+
+	const filterCardsBy = (items, filterBy) => {
+		return items?.filter((item) =>
+			item.tags
+				.split(", ")
+				.join(" ")
+				.toLowerCase()
+				.includes(filterBy.toLowerCase())
+		);
+	};
+
+	const finalCards = (items, filterBy, sortBy) => {
+		return sortCardsBy(filterCardsBy(items, filterBy), sortBy);
+	};
+
+	cards = finalCards(cards, activeFilterValue, activeSortValue);
 
 	const handleChangeSort = (event) => {
-		dispatch(sortCards(filteredCards, event.target.value));
+		dispatch(sortCards(event.target.value));
 	};
 
 	const handleChangeFilter = (event) => {
-		dispatch(filterCards(cards, event.target.value));
+		dispatch(filterCards(event.target.value));
 	};
 
 	useEffect(() => {
@@ -28,7 +59,7 @@ const Home = () => {
 			<h1 className="title">Галерея</h1>
 			<Sort activeSortValue={activeSortValue} onChangeSort={handleChangeSort} />
 			<Filter onChangeFilter={handleChangeFilter} />
-			<Catalog items={filteredCards} loading={loading} />
+			<Catalog items={cards} loading={loading} />
 		</>
 	);
 };

@@ -3,57 +3,20 @@ export const fetchCards = () => (dispatch) => {
 		"https://pixabay.com/api/?key=21157636-be398b2a266e9f0d9869a57c6&q=cats&image_type=all&per_page=100"
 	)
 		.then((resp) => resp.json())
-		.then((json) =>
-			dispatch({
-				type: "FETCH_CARDS",
-				payload: json.hits,
-			})
-		);
+		.then((json) => dispatch(setCards(json.hits)));
 };
 
-export const sortCards = (items, sortBy) => (dispatch) => {
-	const cards = [...items];
+export const setCards = (items) => ({
+	type: "SET_CARDS",
+	payload: items,
+});
 
-	if (sortBy === "default") {
-		return items;
-	}
+export const sortCards = (sortBy) => ({
+	type: "SET_SORT_BY",
+	payload: sortBy,
+});
 
-	if (sortBy === "likes") {
-		cards.sort((current, next) => {
-			return next.likes - current.likes;
-		});
-	}
-
-	if (sortBy === "comments") {
-		cards.sort((current, next) => {
-			return next.comments - current.comments;
-		});
-	}
-
-	dispatch({
-		type: "SORT_CARDS",
-		payload: {
-			items: cards,
-			sortBy,
-		},
-	});
-};
-
-export const filterCards = (items, filterBy) => (dispatch) => {
-	dispatch({
-		type: "FILTER_CARDS_BY_TAGS",
-		payload: {
-			items:
-				filterBy === ""
-					? items
-					: items.filter((item) =>
-							item.tags
-								.split(", ")
-								.join(" ")
-								.toLowerCase()
-								.includes(filterBy.toLowerCase())
-					  ),
-			filterBy,
-		},
-	});
-};
+export const filterCards = (filterBy) => ({
+	type: "SET_FILTER_BY",
+	payload: filterBy,
+});

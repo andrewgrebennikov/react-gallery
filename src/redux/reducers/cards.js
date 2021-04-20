@@ -1,35 +1,29 @@
 const initialState = {
 	items: null,
-	filteredItems: null,
 	sortBy: "default",
 	filterBy: "",
 };
 
-const cards = (state = initialState, action) => {
-	if (action.type === "FETCH_CARDS") {
-		return {
-			...state,
-			items: action.payload,
-			filteredItems: action.payload,
-			sortBy: "default",
-		};
+const cards = (state = initialState, { type, payload }) => {
+	switch (type) {
+		case "SET_CARDS":
+			return {
+				...state,
+				items: payload,
+			};
+		case "SET_SORT_BY":
+			return {
+				...state,
+				sortBy: payload,
+			};
+		case "SET_FILTER_BY":
+			return {
+				...state,
+				filterBy: payload,
+			};
+		default:
+			return state;
 	}
-	if (action.type === "SORT_CARDS") {
-		return {
-			...state,
-			sortBy: action.payload.sortBy,
-			filteredItems: action.payload.items,
-		};
-	}
-	if (action.type === "FILTER_CARDS_BY_TAGS") {
-		return {
-			...state,
-			sortBy: "default",
-			filterBy: action.payload.filterBy,
-			filteredItems: action.payload.items,
-		};
-	}
-	return state;
 };
 
 export default cards;

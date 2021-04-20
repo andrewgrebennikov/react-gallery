@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCards } from "../redux/actions/cards";
 import { useParams } from "react-router-dom";
+import { CardTags } from "../components";
 
 const Card = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const cards = useSelector(({ cards }) => cards.items);
-	const detailsCard = cards
-		? cards.find((card) => card.id === parseInt(id))
-		: null;
+	const detailsCard = cards?.find((card) => card.id === parseInt(id));
 
 	useEffect(() => {
 		dispatch(fetchCards());
@@ -34,17 +33,7 @@ const Card = () => {
 					<p className="card-detailes__info">
 						Количество комментариев: <b>{detailsCard.comments}</b>
 					</p>
-					<div className="tags card-detailes__tags">
-						<ul className="tags__list">
-							{detailsCard.tags.split(", ").map((tag, index) => {
-								return (
-									<li key={index} className="tags__item tag">
-										{tag}
-									</li>
-								);
-							})}
-						</ul>
-					</div>
+					<CardTags tags={detailsCard.tags} className="card-detailes__tags" />
 					<table className="card-detailes__table">
 						<tbody>
 							{Object.entries(detailsCard).map(([key, value], index) => {
