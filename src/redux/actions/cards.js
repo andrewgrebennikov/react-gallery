@@ -1,5 +1,5 @@
-export const fetchCards = () => (dispatch) => {
-	fetch(
+export const fetchCards = () => async (dispatch) => {
+	await fetch(
 		"https://pixabay.com/api/?key=21157636-be398b2a266e9f0d9869a57c6&q=cats&image_type=all&per_page=100"
 	)
 		.then((resp) => resp.json())

@@ -1,46 +1,45 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCards } from "../redux/actions/cards";
 import { useParams } from "react-router-dom";
+import { fetchCard } from "../redux/actions/card";
 import { CardTags } from "../components";
 
 const Card = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
-	const cards = useSelector(({ cards }) => cards.items);
-	const detailsCard = cards?.find((card) => card.id === parseInt(id));
+	const card = useSelector(({ card }) => card.item);
 
 	useEffect(() => {
-		dispatch(fetchCards());
-	}, [dispatch]);
+		dispatch(fetchCard(id));
+	}, [dispatch, id]);
 
 	return (
 		<>
 			<h1 className="title">Изображение</h1>
-			{detailsCard ? (
-				<div className="card-detailes">
+			{card ? (
+				<div className="card-details">
 					<img
-						src={detailsCard.webformatURL}
-						alt={detailsCard.type}
-						className="card-detailes__img"
-						width={detailsCard.webformatWidth}
-						height={detailsCard.webformatHeight}
+						src={card.webformatURL}
+						alt={card.type}
+						className="card-details__img"
+						width={card.webformatWidth}
+						height={card.webformatHeight}
 						loading="lazy"
 					/>
-					<p className="card-detailes__info">
-						Количество лайков: <b>{detailsCard.likes}</b>
+					<p className="card-details__info">
+						Количество лайков: <b>{card.likes}</b>
 					</p>
-					<p className="card-detailes__info">
-						Количество комментариев: <b>{detailsCard.comments}</b>
+					<p className="card-details__info">
+						Количество комментариев: <b>{card.comments}</b>
 					</p>
-					<CardTags tags={detailsCard.tags} className="card-detailes__tags" />
-					<table className="card-detailes__table">
+					<CardTags tags={card.tags} className="card-details__tags" />
+					<table className="card-details__table">
 						<tbody>
-							{Object.entries(detailsCard).map(([key, value], index) => {
+							{Object.entries(card).map(([key, value], index) => {
 								return (
-									<tr key={index} className="card-detailes__tr">
-										<th className="card-detailes__th">{key}</th>
-										<td className="card-detailes__td">{value}</td>
+									<tr key={index} className="card-details__tr">
+										<th className="card-details__th">{key}</th>
+										<td className="card-details__td">{value}</td>
 									</tr>
 								);
 							})}

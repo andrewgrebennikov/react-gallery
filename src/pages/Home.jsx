@@ -52,7 +52,7 @@ const Home = () => {
 	useEffect(() => {
 		dispatch(fetchCards());
 		setLoading(false);
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<>
