@@ -1,21 +1,22 @@
 import React from "react";
 import { Card } from "./";
 
-const Catalog = ({ items, loading }) => {
+const Catalog = ({ items, isLoading }) => {
 	return (
 		<div className="catalog">
-			{loading && <p>Загрузка...</p>}
-			<div className="catalog__list">
-				{items != null ? (
-					items.length ? (
+			{!items ? (
+				isLoading && <p>Загрузка...</p>
+			) : (
+				<div className="catalog__list">
+					{items.length === 0 ? (
+						<p>Ничего не найдено</p>
+					) : (
 						items.map((card) => {
 							return <Card key={card.id} {...card} />;
 						})
-					) : items.length === 0 ? (
-						<p>Ничего не найдено</p>
-					) : null
-				) : null}
-			</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };

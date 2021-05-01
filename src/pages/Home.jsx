@@ -5,10 +5,10 @@ import { Catalog, Filter, Sort } from "../components";
 
 const Home = () => {
 	const dispatch = useDispatch();
-	const [loading, setLoading] = useState(true);
 	let cards = useSelector(({ cards }) => cards.items);
 	const activeSortValue = useSelector(({ cards }) => cards.sortBy);
 	const activeFilterValue = useSelector(({ cards }) => cards.filterBy);
+	const isLoading = useSelector(({ loading }) => loading.isLoading);
 
 	const sortCardsBy = (items, sortBy) => {
 		switch (sortBy) {
@@ -51,15 +51,20 @@ const Home = () => {
 
 	useEffect(() => {
 		dispatch(fetchCards());
-		setLoading(false);
 	}, [dispatch]);
 
 	return (
 		<>
 			<h1 className="title">Галерея</h1>
-			<Sort activeSortValue={activeSortValue} onChangeSort={handleChangeSort} />
-			<Filter onChangeFilter={handleChangeFilter} />
-			<Catalog items={cards} loading={loading} />
+			<Sort
+				activeSortValue={activeSortValue}
+				onChangeSort={handleChangeSort}
+			/>
+			<Filter
+				onChangeFilter={handleChangeFilter}
+				activeFilterValue={activeFilterValue}
+			/>
+			<Catalog items={cards} isLoading={isLoading} />
 		</>
 	);
 };

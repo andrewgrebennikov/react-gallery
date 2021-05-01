@@ -9,6 +9,11 @@ const card = (state = initialState, { type, payload }) => {
 				...state,
 				item: payload,
 			};
+		case "REMOVE_CARD":
+			return {
+				...state,
+				item: payload,
+			};
 		default:
 			return state;
 	}
